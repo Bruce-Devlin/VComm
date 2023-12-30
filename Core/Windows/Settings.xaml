@@ -1,0 +1,28 @@
+﻿<Window x:Class="VComm.Core.Windows.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VComm.Core.Windows"
+        mc:Ignorable="d"
+        Title="Settings" Loaded="Window_Loaded" Closed="Window_Closed" Height="483" Width="749" Background="#FF2D2D2D" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid>
+            <CheckBox x:Name="PTTCheck" Content="" Checked="PTTCheck_Checked" Unchecked="PTTCheck_Unchecked" HorizontalAlignment="Left" Margin="219,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.727,0.731" Height="16" Width="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="41,20,0,0" TextWrapping="Wrap" Text="PUSH-TO-TALK:" VerticalAlignment="Top" Height="24" Width="173" FontSize="20" Foreground="White" FontFamily="Jepanten"/>
+            <TextBlock HorizontalAlignment="Left" Margin="41,57,0,0" TextWrapping="Wrap" Text="PTT KEY:" VerticalAlignment="Top" Height="19" Width="100" FontSize="20" Foreground="White" FontFamily="Jepanten"/>
+            <Button x:Name="PTTKey" Content="PTTKey" Click="PTTKey_Click" KeyDown="PTTKey_KeyDown" HorizontalAlignment="Left" Margin="146,55,0,0" VerticalAlignment="Top" Height="24" Width="116" IsEnabled="False" FontFamily="Jepanten"/>
+            <TextBlock HorizontalAlignment="Left" Margin="382,20,0,0" TextWrapping="Wrap" Text="ACTIVE VPACK:" VerticalAlignment="Top" Height="24" Width="172" FontSize="20" Foreground="White" FontFamily="Jepanten"/>
+            <ComboBox x:Name="VPackList" SelectionChanged="VPackList_SelectionChanged" HorizontalAlignment="Left" Margin="559,19,0,0" VerticalAlignment="Top" Width="120" FontFamily="Jepanten"/>
+            <TextBlock Margin="0,0,23,50" TextWrapping="Wrap" Text="MADE WITH 💜 BY DEVLIN" Foreground="#FF777777" FontSize="16" FontWeight="Bold" TextAlignment="Right" HorizontalAlignment="Right" Width="253" Height="34" VerticalAlignment="Bottom" FontFamily="Jepanten"/>
+            <CheckBox x:Name="OverlayCheck" Content="" Checked="OverlayCheck_Checked" Unchecked="OverlayCheck_Unchecked" HorizontalAlignment="Left" Margin="588,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.727,0.731" Height="16" Width="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="382,57,0,0" TextWrapping="Wrap" Text="OVERLAY VISABLE:" VerticalAlignment="Top" Height="20" Width="198" FontSize="20" Foreground="White" FontFamily="Jepanten"/>
+            <TextBlock x:Name="BuildInfo" HorizontalAlignment="Left" Margin="23,0,0,50" TextWrapping="Wrap" Text="VERSION:" VerticalAlignment="Bottom" Height="34" Width="450" Foreground="#FF777777" FontSize="16" FontWeight="Bold" FontFamily="Jepanten"/>
+        </Grid>
+        <Grid x:Name="FirstRun" Background="#DA000000" Visibility="Collapsed">
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="WELCOME TO VCOMM" VerticalAlignment="Top" FontFamily="Jepanten" Height="48" Width="480" Foreground="White" TextAlignment="Center" FontSize="36" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Center" Margin="0,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Jepanten" Height="310" Width="676" Foreground="White" TextAlignment="Center" FontSize="18"><Run Text="Thanks for checking out VC"/><Run Text="omm"/><Run Text="!"/><LineBreak/><Run/><LineBreak/><Run Text="This is the settings page, here you can configure VComm."/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run Text="You can see the overlay (up the top left)"/><Run Text=", you can speak and see the level change to ensure VComm can hear you."/><LineBreak/><Run/><LineBreak/><Run Text="VComm is displayed in the System Tray (bottom right arrow)"/><Run Text=","/><Run Text=" you can right-click the icon "/><Run Text="to view the settings or to exit VComm."/><LineBreak/><Run/><LineBreak/><Run Text="I hope you enjoy, if you have any issues or questions join our Discord using the link in the settings page. "/><LineBreak/><Run/><LineBreak/><Run Language="en-gb" Text="I've automatically setup the Ready Or Not VPack for you but you can always edit/add more."/><LineBreak/><Run/></TextBlock>
+            <Button x:Name="IntroDoneBtn" Click="IntroDoneBtn_Click" Content="SOUNDS GOOD!" HorizontalAlignment="Center" Margin="0,362,0,0" VerticalAlignment="Top" FontFamily="Jepanten" Height="55" Width="241" FontSize="20" BorderBrush="{x:Null}"/>
+        </Grid>
+    </Grid>
+</Window>
