@@ -8,6 +8,9 @@ namespace VComm.Core.Functions
         private IKeyboardMouseEvents? inputHook;
         public bool listening = false;
 
+        /// <summary>
+        /// Starts the VoiceEngine.
+        /// </summary>
         public async Task StartEngine()
         {
             await this.Log("Starting VoiceEngine...");
@@ -53,6 +56,9 @@ namespace VComm.Core.Functions
             await this.Log("VoiceEngine ready!");
         }
 
+        /// <summary>
+        /// Subscribes to the Push-To-talk Hook.
+        /// </summary>
         public async Task SubscribeToPTTHooks()
         {
             inputHook = Hook.GlobalEvents();
@@ -60,6 +66,9 @@ namespace VComm.Core.Functions
             inputHook.KeyUp += OnKeyUp;
         }
 
+        /// <summary>
+        /// Removed the Push-To-Talk Events and disposes of the Hook.
+        /// </summary>
         public async Task RemovePTTHooks()
         {
             inputHook.KeyDown -= OnKeyDown;
@@ -67,6 +76,9 @@ namespace VComm.Core.Functions
             inputHook.Dispose();
         }
 
+        /// <summary>
+        /// Event handler for OnKeyDown. (used for Push-To-Talk)
+        /// </summary>
         private async void OnKeyDown(object? sender, System.Windows.Forms.KeyEventArgs e)
         {
             
@@ -78,6 +90,9 @@ namespace VComm.Core.Functions
                 }
             }
         }
+        /// <summary>
+        /// Event handler for OnKeyUp. (used for Push-To-Talk)
+        /// </summary>
         private async void OnKeyUp(object? sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (Data.isPTTActive())
@@ -89,6 +104,9 @@ namespace VComm.Core.Functions
             }
         }
 
+        /// <summary>
+        /// Allows the VoiceEngine to start listening.
+        /// </summary>
         public async Task StartListening()
         {
             if (!listening)
@@ -99,6 +117,9 @@ namespace VComm.Core.Functions
             }
         }
 
+        /// <summary>
+        /// Stops the VoiceEngine from listening.
+        /// </summary>
         public async Task StopListening()
         {
             if (listening) 
@@ -109,6 +130,9 @@ namespace VComm.Core.Functions
             }
         }
 
+        /// <summary>
+        /// Event handler for when the VoiceEnginer audio input stream changes.
+        /// </summary>
         private async void Engine_AudioStateChanged(object? sender, AudioStateChangedEventArgs e)
         {
             await this.Log($"Audio State Changed: {e.AudioState}");
@@ -116,6 +140,9 @@ namespace VComm.Core.Functions
             if (e.AudioState == AudioState.Silence || e.AudioState == AudioState.Stopped) Variables.Overlay.Volume = 0;
         }
 
+        /// <summary>
+        /// Reloads the VoiceEngine. (have you tried turning it off and on again?)
+        /// </summary>
         public async Task ReloadEngine()
         {
             await this.Log("Reloading the VoiceEngine...");
@@ -123,6 +150,9 @@ namespace VComm.Core.Functions
             await StartEngine();
         }
 
+        /// <summary>
+        /// Shuts down the VoiceEngine and disposes of it cleanly.
+        /// </summary>
         public async Task StopEngine()
         {
             await this.Log("Stopping VoiceEngine...");
@@ -131,11 +161,17 @@ namespace VComm.Core.Functions
             engine = null;
         }
 
+        /// <summary>
+        /// Event handler for when the audio input level/volume changes.
+        /// </summary>
         public async void Engine_AudioLevelChange(object? sender, AudioLevelUpdatedEventArgs e)
         {
             Variables.Overlay.Volume = e.AudioLevel;
         }
 
+        /// <summary>
+        /// Event handler for when the VoiceEngine begins to recognize a Phrase. (partial match)
+        /// </summary>
         public async void Engine_SpeechHypothesized(object? sender, SpeechHypothesizedEventArgs e)
         {
             string text = e.Result.Text + "?";
@@ -144,6 +180,9 @@ namespace VComm.Core.Functions
             await Variables.Overlay.SetSpeechText(e.Result.Text.ToUpper(), true);
         }
 
+        /// <summary>
+        /// Event handler for when the VoiceEnginer recognizes a matching phrase. (full match)
+        /// </summary>
         public async void Engine_SpeechRecognized(object? sender, SpeechRecognizedEventArgs e)
         {
             string request = e.Result.Text;
@@ -161,12 +200,20 @@ namespace VComm.Core.Functions
             Task.Run(async () => { await Simulate.Press(vRequest.macro); }); 
         }
 
+        /// <summary>
+        /// Finds a VRequest by providing a recognized Phrase.
+        /// </summary>
+        /// <param name="requestRecognized">The Phrase recognized</param>
+        /// <returns></returns>
         public async Task<VRequest> FindVRequest(string requestRecognized)
         {
             VPack vPack = Variables.ActiveVPack;
             return vPack.vRequests.FirstOrDefault(r => r.phrases.FirstOrDefault(p => p == requestRecognized) == requestRecognized);
         }
 
+        /// <summary>
+        /// Play a chime. (*radio-check, over?*)
+        /// </summary>
         public async Task Chime()
         {
             string chimePath = Variables.ChimePath;

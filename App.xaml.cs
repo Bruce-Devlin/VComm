@@ -9,12 +9,14 @@
         {
             HandleArgs(e.Args);
             HandleErrors();
+           
+
+            PreInit init = new PreInit();
+            await init.Start();
+
             Preloader preloader = new Preloader();
             preloader.Show();
-
-            Init init = new Init();
-            await init.Start();
-            preloader.initComplete = true;
+            preloader.preInitComplete = true;
         }
 
         public void HandleErrors()

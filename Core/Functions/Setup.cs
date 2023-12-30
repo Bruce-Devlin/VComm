@@ -2,6 +2,9 @@
 {
     internal class Setup
     {
+        /// <summary>
+        /// Runs checks required before application runtime.
+        /// </summary>
         public async Task RuntimeChecks()
         {
             await this.Log("Running Init...");
@@ -9,6 +12,9 @@
             await ApplySettings();
         }
 
+        /// <summary>
+        /// Makes changes/applies settings saved in the config file.
+        /// </summary>
         public async Task<bool> ApplySettings()
         {
             await this.Log("Applying settings...");
@@ -35,6 +41,9 @@
             return true;
         }
 
+        /// <summary>
+        /// Performs a check of the VPacks folder for any available VPacks.
+        /// </summary>
         public async Task<bool> CheckForVPacks()
         {
             await this.Log("Checking for VPacks...");
@@ -48,7 +57,7 @@
             {
                 foreach (FileInfo vPack in vPacks) 
                 {
-                    VPack? pack = await Data.LoadVPack(vPack.FullName);
+                    VPack? pack = await Data.LoadVPack(new Uri(vPack.FullName));
                     if (pack != null)
                     {
                         if (Variables.VPacks.Any(p => p.name == pack.name))
@@ -88,7 +97,7 @@
                     {
                         string result = reader.ReadToEnd();
 
-                        VPack vPack = await result.LoadVPackFromString();
+                        VPack vPack = await Data.LoadVPack(result);
 
                         await Data.SaveVPack(vPack);
                         Variables.VPacks.Add(vPack);

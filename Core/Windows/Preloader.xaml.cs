@@ -5,8 +5,7 @@
     /// </summary>
     public partial class Preloader : Window
     {
-        public bool initComplete = false;
-
+        public bool preInitComplete = false;
 
         public Preloader()
         {
@@ -21,8 +20,8 @@
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            while (!initComplete) { await Task.Delay(500); }
-            await this.Log("Init Complete!");
+            while (!preInitComplete) { await Task.Delay(500); }
+            await this.Log("PreInit Complete!");
 
             Variables.Overlay = new Overlay();
             Variables.Overlay.Show();
