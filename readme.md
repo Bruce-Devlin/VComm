@@ -6,7 +6,7 @@ VCOMM is a voice recognition software used to assist in commanding units/AI in v
 VCOMM allows you to set macros to voice commands that could give you an extra edge when playing your favorite games. VComm is an external application rather than a mod and so can be used on any program/app or game!
 
 ## Installation
-Download VCOMM directly from the site [HERE](https://vcomm.publiczeus.com).
+Download VCOMM directly from the site [HERE](https://vcomm.publiczeus.com/download/VComm.exe).
 Once downloaded you can run the VComm.exe and boom, gaming is much cooler!
 
 ## Usage
