@@ -71,18 +71,35 @@
             {
                 await this.Log("No VPacks found, creating one for you...");
 
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                var manifestNames = assembly.GetManifestResourceNames();
+                List<string> defaultVPacks = new List<string>();
+                foreach (var name in manifestNames)
+                {
+                    if (name.StartsWith("VComm.Core.Assets.VPacks"))
+                    {
+                        defaultVPacks.Add(name);
+                    }
+                }
+                foreach (string defaultVPack in defaultVPacks)
+                {
+                    using (Stream stream = assembly.GetManifestResourceStream(defaultVPack))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string result = reader.ReadToEnd();
 
-                VPack vPack = new VPack();
+                        VPack vPack = await result.LoadVPackFromString();
 
-                vPack.name = "Ready Or Not";
-                vPack.author = "Devlin";
-                vPack.vRequests = Variables.ReadyOrNot_vRequests;
+                        await Data.SaveVPack(vPack);
+                        Variables.VPacks.Add(vPack);
 
-                await Data.SaveVPack(vPack);
-                Variables.VPacks.Add(vPack);
+                        Variables.FirstRun = true;
+
+                    }
+                }
 
 
-                Variables.FirstRun = true;
+                
             }
             return true;
         }

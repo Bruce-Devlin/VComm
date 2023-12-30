@@ -1,4 +1,6 @@
-﻿namespace VComm.Core.Windows
+﻿using VComm.Core.Objects;
+
+namespace VComm.Core.Windows
 {
     /// <summary>
     /// Interaction logic for Overlay.xaml
@@ -15,10 +17,13 @@
             } 
         }
 
-        public async Task SetSpeechText(string text)
+        public async Task SetSpeechText(string text, bool hypothetical = false)
         {
+            if (hypothetical) RecognizedText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 175,0));
+            else RecognizedText.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 6, 176, 37));
+
             RecognizedText.Text = text;
-            await Task.Delay(1000);
+            await Task.Run(async () => { await Task.Delay(3000); }); 
             RecognizedText.Text = "";
         }
 

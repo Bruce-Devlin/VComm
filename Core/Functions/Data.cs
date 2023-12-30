@@ -1,6 +1,6 @@
 ﻿namespace VComm.Core.Functions
 {
-    internal class Data
+    internal static class Data
     {
         
         public static async Task<VPack>? LoadVPack(string filepath)
@@ -10,6 +10,14 @@
 
             if (File.Exists(filepath))
                 vPack = JsonConvert.DeserializeObject<VPack>(json);
+
+            return vPack;
+        }
+
+        public static async Task<VPack>? LoadVPackFromString(this string json)
+        {
+            VPack? vPack = null;
+            vPack = JsonConvert.DeserializeObject<VPack>(json);
 
             return vPack;
         }
@@ -46,9 +54,6 @@
 
             return value;
         }
-
-
-
 
         public static bool isPTTActive()
         {

@@ -23,13 +23,13 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        <Grid x:Name="OverlayGrid">
-            <TextBlock TextWrapping="Wrap" FontSize="48" TextAlignment="Center" FontWeight="Bold" Foreground="#3FFFFFFF" HorizontalAlignment="Left" Width="230" Height="75" VerticalAlignment="Top"><Run Language="en-gb" Text="VCOMM"/><LineBreak/><Run Language="en-gb" Text="is running"/></TextBlock>
+        <Grid x:Name="OverlayGrid" Opacity="0.35">
+            <TextBlock TextWrapping="Wrap" FontSize="48" TextAlignment="Center" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Width="230" Height="45" VerticalAlignment="Top" FontFamily="Jepanten" Text="VCOMM"/>
             <Grid Height="55" VerticalAlignment="Top" Canvas.Left="364" Margin="230,18,0,0" HorizontalAlignment="Left" Width="730">
-                <ProgressBar x:Name="VolumeBar" Height="29" Canvas.Left="510" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" Foreground="#3F06B025" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
-                <TextBlock x:Name="RecognizedText" FontWeight="Bold" Foreground="#3F06B025" FontSize="20" Height="27" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                <ProgressBar x:Name="VolumeBar" Height="29" Canvas.Left="510" RenderTransformOrigin="0.5,0.5" Background="{x:Null}" Foreground="#FF06B025" BorderBrush="{x:Null}" VerticalAlignment="Top"/>
+                <TextBlock x:Name="RecognizedText" FontWeight="Bold" Foreground="#FFFFAF00" FontSize="20" Height="27" VerticalAlignment="Top" Margin="0,28,0,0"/>
             </Grid>
-            <TextBlock TextWrapping="Wrap" FontSize="14" TextAlignment="Center" FontWeight="Bold" Foreground="#3FFFFFFF" HorizontalAlignment="Left" Width="130" Height="23" VerticalAlignment="Top" Margin="100,50,0,0"><Run Text="IS RUNNING"/><Run Language="en-gb" Text="..."/></TextBlock>
+            <TextBlock TextWrapping="Wrap" FontSize="14" TextAlignment="Center" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" Width="130" Height="14" VerticalAlignment="Top" Margin="117,38,0,0" FontFamily="Jepanten"><Run Text="IS RUNNING"/><Run Language="en-gb" Text="..."/></TextBlock>
         </Grid>
     </Grid>
 </Window>

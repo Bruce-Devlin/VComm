@@ -1,4 +1,6 @@
-﻿namespace VComm.Core.Functions
+﻿using VComm.Core.Objects;
+
+namespace VComm.Core.Functions
 {
     internal class VoiceEngine
     {
@@ -138,6 +140,8 @@
         {
             string text = e.Result.Text + "?";
             await this.Log($"Detected text: {text}");
+
+            await Variables.Overlay.SetSpeechText(e.Result.Text.ToUpper(), true);
         }
 
         public async void Engine_SpeechRecognized(object? sender, SpeechRecognizedEventArgs e)
@@ -145,15 +149,22 @@
             string request = e.Result.Text;
             string text = request + ".";
             await this.Log($"Detected text: {text}");
-            await Chime();
+            
+            Variables.Overlay.SetSpeechText(e.Result.Text.ToUpper());
 
-            await Variables.Overlay.SetSpeechText(e.Result.Text.ToUpper());
+            VRequest vRequest = null;
 
+            vRequest = await Task.Run(async () => { return await FindVRequest(request); });
+
+            Task.Run(async () => { await Chime(); });
+            await this.Log($"Sending \"{vRequest.macro}\" from: {Variables.ActiveVPack}");
+            Task.Run(async () => { await Simulate.Press(vRequest.macro); }); 
+        }
+
+        public async Task<VRequest> FindVRequest(string requestRecognized)
+        {
             VPack vPack = Variables.ActiveVPack;
-            VRequest vRequest = vPack.vRequests.FirstOrDefault(r => r.phrases.FirstOrDefault(p => p == request) == e.Result.Text);
-
-            await this.Log($"Sending \"{vRequest.macro}\" from: {vPack}");
-            await Simulate.Press(vRequest.macro);
+            return vPack.vRequests.FirstOrDefault(r => r.phrases.FirstOrDefault(p => p == requestRecognized) == requestRecognized);
         }
 
         public async Task Chime()

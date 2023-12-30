@@ -10,13 +10,14 @@
     <UseWindowsForms>True</UseWindowsForms>
     <StartupObject>VComm.App</StartupObject>
     <ApplicationIcon>Core\Assets\Images\vcomm.ico</ApplicationIcon>
-    <FileVersion>1.0.2.1</FileVersion>
-    <AssemblyVersion>1.0.2.1</AssemblyVersion>
+    <FileVersion>1.0.2.2</FileVersion>
+    <AssemblyVersion>1.0.3.2</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Core\Assets\Fonts\Jepanten.ttf" />
     <None Remove="Core\Assets\Images\VCOMM_icon_2.png" />
+    <None Remove="Core\Assets\Ready Or Not.vcomm" />
     <None Remove="Core\Assets\Sounds\chime.wav" />
     <None Remove="Core\Assets\VCOMM_big.png" />
     <None Remove="Core\Assets\VCOMM_big_2.png" />
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Core\Assets\VPacks\Ready Or Not.vcomm" />
     <EmbeddedResource Include="Core\Assets\Sounds\chime.wav" />
   </ItemGroup>
 
@@ -50,5 +52,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Speech" Version="8.0.0" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
